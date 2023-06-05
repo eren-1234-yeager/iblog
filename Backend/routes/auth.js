@@ -31,4 +31,47 @@ router.post('/login', [
     }
 })
 
+//Route 2: To signup a user
+
+router.post('/signup', [
+    body('username').isLength({ min: 3 }),//Checking Validation for username
+    body('password').isLength({ min: 5 }),//Checking Validation for password
+    body('cpassword').isLength({ min: 5 })//Checking Validation for password
+], async (req, res) => {
+    const errors = validationResult(req);
+
+    //Check for errors
+    if (!errors.isEmpty()) {
+        return res.status(400).json({ errors: errors.array() });
+    }
+    let { username, password, cpassword } = req.body
+    try {
+        if (password != cpassword) {
+            res.status(401).json({ message_type: "Error", message: "Invalid Crendentials" })
+            return;
+        }
+        let find_user = await Users.findOne({
+            username: username,
+        })
+        if (find_user) {
+            res.status(400).json({ message_type: "Error", message: "Username already exists" })
+            return; F
+        }
+        let create_user = await Users.create({
+            username: username,
+            password: password
+        })
+
+        if (create_user) {
+            res.status(200).json({ message_type: "success", message: "User created successfully" })
+        } else {
+            res.status(401).json({ message_type: "Error", message: "Invalid Crendentials" })
+        }
+
+    } catch (e) {
+        res.status(500).send("Internal Server Error")
+    }
+})
+
+
 module.exports = router;
