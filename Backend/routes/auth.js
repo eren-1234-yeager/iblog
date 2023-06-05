@@ -2,7 +2,10 @@ const express = require('express');
 const Users = require('../models/User')
 const { body, validationResult } = require('express-validator');
 const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');//jsonwebtoken to sign data
 
+require('dotenv').config();
+const jwt_key = process.env.JWT_KEY;
 const router = express.Router();
 
 //Route 1: To Login user...
@@ -22,18 +25,25 @@ router.post('/login', [
         let find_user = await Users.findOne({
             username: username,
         })
-        
+
         //If user exists
         if (find_user) {
 
             let n_password = await bcrypt.compare(password, find_user.password)
 
-            if (!n_password) {
+            if (!n_password) {//If passwords didn't match
                 return res.status(401).json({ message_type: "Error", message: "Invalid Crendentials" })
             }
 
-            res.status(200).json({ message_type: "success", message: "Logged in Succcessfully!" })
+            let data = {
+                user: {
+                    id: find_user._id
+                }
+            }
 
+            let authToken = jwt.sign(data, jwt_key);
+
+            res.status(200).json({ message_type: "success", message: "Logged in Succcessfully!", authToken })
         } else {
             res.status(401).json({ message_type: "Error", message: "Invalid Crendentials" })
         }
@@ -76,9 +86,15 @@ router.post('/signup', [
             password: hash_pass
         })
         create_user.save()
+        let data = {
+            user: {
+                id: create_user._id
+            }
+        }
+        let authToken = jwt.sign(data, jwt_key)
+        res.status(200).json({ message_type: "success", message: "User created successfully", authToken })
 
-        res.status(200).json({ message_type: "success", message: "User created successfully" })
-
+        localstorage.setItem("iblog_authToken", authToken);
 
     } catch (e) {
         res.status(500).send("Internal Server Error")
