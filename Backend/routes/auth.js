@@ -1,6 +1,7 @@
 const express = require('express');
 const Users = require('../models/User')
 const { body, validationResult } = require('express-validator');
+const bcrypt = require('bcrypt');
 
 const router = express.Router();
 
@@ -20,11 +21,19 @@ router.post('/login', [
         //Check if user already exists
         let find_user = await Users.findOne({
             username: username,
-            password: password
         })
+        
         //If user exists
         if (find_user) {
+
+            let n_password = await bcrypt.compare(password, find_user.password)
+
+            if (!n_password) {
+                return res.status(401).json({ message_type: "Error", message: "Invalid Crendentials" })
+            }
+
             res.status(200).json({ message_type: "success", message: "Logged in Succcessfully!" })
+
         } else {
             res.status(401).json({ message_type: "Error", message: "Invalid Crendentials" })
         }
@@ -51,6 +60,10 @@ router.post('/signup', [
         if (password != cpassword) {//If passwords didn't match
             return res.status(401).json({ message_type: "Error", message: "Invalid Crendentials" })
         }
+        let salt = await bcrypt.genSalt(10)
+
+        let hash_pass = await bcrypt.hash(password, salt);
+
         let find_user = await Users.findOne({//Cheeck if user exists
             username: username,
         })
@@ -60,14 +73,12 @@ router.post('/signup', [
         //If it is new user 
         let create_user = await Users.create({
             username: username,
-            password: password
+            password: hash_pass
         })
+        create_user.save()
 
-        if (create_user) {//If user successfully created
-            res.status(200).json({ message_type: "success", message: "User created successfully" })
-        } else {
-            res.status(401).json({ message_type: "Error", message: "Invalid Crendentials" })
-        }
+        res.status(200).json({ message_type: "success", message: "User created successfully" })
+
 
     } catch (e) {
         res.status(500).send("Internal Server Error")
