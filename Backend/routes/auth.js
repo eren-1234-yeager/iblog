@@ -17,10 +17,12 @@ router.post('/login', [
     }
     let { username, password } = req.body
     try {
+        //Check if user already exists
         let find_user = await Users.findOne({
             username: username,
             password: password
         })
+        //If user exists
         if (find_user) {
             res.status(200).json({ message_type: "success", message: "Logged in Succcessfully!" })
         } else {
@@ -36,7 +38,7 @@ router.post('/login', [
 router.post('/signup', [
     body('username').isLength({ min: 3 }),//Checking Validation for username
     body('password').isLength({ min: 5 }),//Checking Validation for password
-    body('cpassword').isLength({ min: 5 })//Checking Validation for password
+    body('cpassword').isLength({ min: 5 })//Checking Validation for cpassword
 ], async (req, res) => {
     const errors = validationResult(req);
 
@@ -46,23 +48,22 @@ router.post('/signup', [
     }
     let { username, password, cpassword } = req.body
     try {
-        if (password != cpassword) {
-            res.status(401).json({ message_type: "Error", message: "Invalid Crendentials" })
-            return;
+        if (password != cpassword) {//If passwords didn't match
+            return res.status(401).json({ message_type: "Error", message: "Invalid Crendentials" })
         }
-        let find_user = await Users.findOne({
+        let find_user = await Users.findOne({//Cheeck if user exists
             username: username,
         })
-        if (find_user) {
-            res.status(400).json({ message_type: "Error", message: "Username already exists" })
-            return; F
+        if (find_user) {//If user exists
+            return res.status(400).json({ message_type: "Error", message: "Username already exists" })
         }
+        //If it is new user 
         let create_user = await Users.create({
             username: username,
             password: password
         })
 
-        if (create_user) {
+        if (create_user) {//If user successfully created
             res.status(200).json({ message_type: "success", message: "User created successfully" })
         } else {
             res.status(401).json({ message_type: "Error", message: "Invalid Crendentials" })
