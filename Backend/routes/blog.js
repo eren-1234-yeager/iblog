@@ -16,13 +16,14 @@ router.post('/post', [
         return res.status(400).json({ errors: errors.array() })
     }
     try {
-        const { title, description, genre } = req.body
+        const { title, description,slug, genre } = req.body
 
         const create_blog = await Blogs.create({
-            title: title,
+            title,
             user: req.user.id,
-            description: description,
-            genre: genre
+            description,
+            genre,
+            slug
         })
         create_blog.save()
 

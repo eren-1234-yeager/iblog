@@ -15,6 +15,10 @@ const blogSchema = new Schema({
         type: String,
         require: true
     },
+    slug:{
+        type:String,
+        require:true
+    },
     genre: {
         type: String,
         default: "general"
