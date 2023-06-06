@@ -16,7 +16,7 @@ router.post('/post', [
         return res.status(400).json({ errors: errors.array() })
     }
     try {
-        const { title, description,slug, genre } = req.body
+        const { title, description, slug, genre } = req.body
 
         const create_blog = await Blogs.create({
             title,
@@ -69,5 +69,20 @@ router.get('/find/:genre', async (req, res) => {
     }
 })
 
+//Route 4: To find a blog by it's slug...
+router.get('/:slug', async (req, res) => {
+    const { slug } = req.params
+    try {
+        let find_blog = await Blogs.findOne({
+            slug
+        })
 
+        if (!find_blog) {
+            return res.status(400).json({ message_type: "success", message: "No Blog Found" })
+        }
+        res.status(200).json({ message_type: "success", blog: find_blog })
+    } catch {
+        res.status(500).json({ message_type: "error", message: "Internal Server Error" })
+    }
+})
 module.exports = router;
