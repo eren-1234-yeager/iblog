@@ -15,9 +15,9 @@ router.post('/post', [
     if (!errors.isEmpty()) {
         return res.status(400).json({ errors: errors.array() })
     }
-    try{
+    try {
         const { title, description, genre } = req.body
-        
+
         const create_blog = await Blogs.create({
             title: title,
             user: req.user.id,
@@ -25,12 +25,48 @@ router.post('/post', [
             genre: genre
         })
         create_blog.save()
-        
-        return res.status(200).json({message_type:"success",message:"Blog posted successfully!"})
 
-    }catch{
-        return res.status(400).json({message_type:"error",message:"Couldn't save blog"})
+        return res.status(200).json({ message_type: "success", message: "Blog posted successfully!" })
+
+    } catch {
+        return res.status(400).json({ message_type: "error", message: "Couldn't save blog" })
     }
 })
+
+
+//Route 2: To Delete Note
+
+router.delete('/delete/:id', fetchUser, async (req, res) => {
+    const { id } = req.params
+    try {
+        const find_blog = await Blogs.findOne({
+            _id: id,
+        })
+        if (!find_blog) {
+            return res.status(400).send("Invalid id")
+        }
+        if (find_blog.user == req.user.id) {
+            await Blogs.findByIdAndDelete(id)
+            return res.status(200).json({ message_type: "success", message: "Blog deleted successfully!" })
+        }
+        return res.status(401).send("Not Matching")
+    } catch {
+        return res.status(500).send("Internal Server Error")
+    }
+})
+
+//Route 3: To find blog of specific genre
+router.get('/find/:genre', async (req, res) => {
+    const { genre } = req.params
+    try {
+        let find_blogs = await Blogs.find({
+            genre
+        })
+        res.status(200).json({ message_type: "success", blogs: find_blogs })
+    } catch {
+        res.status(500).json({ message_type: "error", message: "Internal Server Error" })
+    }
+})
+
 
 module.exports = router;
