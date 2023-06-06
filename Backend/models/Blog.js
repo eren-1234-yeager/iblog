@@ -4,20 +4,21 @@ const { Schema } = mongoose;
 const blogSchema = new Schema({
     title: {
         type: String,
-        require: true
+        required: true
     },
     user: {
         type: Schema.Types.ObjectId,
         ref:'Users',
-        require:true
+        required:true
     },
     description: {
         type: String,
-        require: true
+        required: true
     },
     slug:{
         type:String,
-        require:true
+        required:true,
+        unique:true
     },
     genre: {
         type: String,
