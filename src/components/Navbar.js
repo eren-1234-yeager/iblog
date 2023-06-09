@@ -1,6 +1,12 @@
-import React from 'react'
+import React, { useContext } from 'react'
+import AuthContext from '../context/authContext'
 
 export default function Navbar(props) {
+    const { loggedin, setLoggedin } = useContext(AuthContext)
+    const logOut = () => {
+        setLoggedin(false)
+        localStorage.removeItem('iblog_authToken')
+    }
     return (
         <>
             <nav className="navbar navbar-expand-lg bg-body-tertiary">
@@ -29,9 +35,22 @@ export default function Navbar(props) {
 
                         </ul>
                         <form className="d-flex" role="search">
-                            <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search"/>
-                                <button className="btn btn-outline-success" type="submit">Search</button>
+                            <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
+                            <button className="btn btn-danger" type="submit">Search</button>
                         </form>
+
+                        {!loggedin &&
+                            <div className="auth mx-1 my-1">
+                                <button className="btn btn-danger mx-1" data-bs-toggle="modal" data-bs-target="#loginModal">Login</button>
+                                <button className="btn btn-danger mx-1">Signup</button>
+                            </div>
+                        }
+
+                        {loggedin &&
+                            <div className="auth mx-1 my-1">
+                                <button className="btn btn-danger mx-1" onClick={logOut}>Logout</button>
+                            </div>
+                        }
                     </div>
                 </div>
             </nav>
