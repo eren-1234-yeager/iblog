@@ -12,7 +12,7 @@ export default function BlogProvider(props) {
       let options={
         method:'GET',
         headers:{
-          'authToken':localStorage.getItem('iblog_authToken')
+          'authToken':localStorage.getItem(process.env.REACT_APP_TOKEN)
         }
       }
       let url = `${process.env.REACT_APP_HOST}/api/blog/find/${genre}`

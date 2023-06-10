@@ -20,7 +20,7 @@ export default function AuthProvider(props) {
       let response = await fetch(url, options)
       let jsonData = await response.json()
       if (response.status === 200) {
-        localStorage.setItem('iblog_authToken', jsonData.authToken)
+        localStorage.setItem(process.env.REACT_APP_TOKEN, jsonData.authToken)
         setLoggedin(true)
       }
     } catch (err) {
