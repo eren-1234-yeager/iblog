@@ -6,7 +6,7 @@ export default function Navbar(props) {
     const { loggedin, setLoggedin } = useContext(AuthContext)
     const logOut = () => {
         setLoggedin(false)
-        localStorage.removeItem('iblog_authToken')
+        localStorage.removeItem(process.env.REACT_APP_TOKEN)
     }
     return (
         <>

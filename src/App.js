@@ -4,6 +4,7 @@ import Navbar from './components/Navbar';
 import BlogProvider from './context/BlogProvider';
 import AuthProvider from './context/AuthProvider';
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import Pagenotfound from './components/Pagenotfound';
 
 function App() {
   return (
@@ -21,7 +22,7 @@ function App() {
               <Route path='/science' element={<Home category="science"/>} />
               <Route path='/programming' element={<Home category="programming"/>} />
               <Route path='/anime' element={<Home category="anime"/>} />
-
+              <Route path='*' element={<Pagenotfound/>}/>
             </Routes>
 
           </BlogProvider>
