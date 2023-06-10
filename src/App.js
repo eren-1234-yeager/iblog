@@ -17,11 +17,11 @@ function App() {
 
             <Routes>
 
-              <Route path='/' element={<Home category="general"/>} />
-              <Route path='/general' element={<Home category="general"/>} />
-              <Route path='/science' element={<Home category="science"/>} />
-              <Route path='/programming' element={<Home category="programming"/>} />
-              <Route path='/anime' element={<Home category="anime"/>} />
+              <Route path='/' element={<Home key="general" category="general"/>} />
+              <Route path='/general' element={<Home key="general" category="general"/>} />
+              <Route path='/science' element={<Home key="science" category="science"/>} />
+              <Route path='/programming' element={<Home key="programming" category="programming"/>} />
+              <Route path='/anime' element={<Home key="anime" category="anime"/>} />
               <Route path='*' element={<Pagenotfound/>}/>
             </Routes>
 

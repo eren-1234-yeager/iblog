@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useContext,useEffect } from 'react'
 import BlogContext from '../context/blogContext'
 import Blogcard from './Blogcard'
 import Login from './Login'
@@ -6,7 +6,11 @@ import AuthContext from '../context/authContext'
 
 export default function Home(props) {
   const { setGenre } = useContext(BlogContext)
-  setGenre(props.category)
+  useEffect(() => {
+    setGenre(props.category)
+    // eslint-disable-next-line
+  }, [])
+  
   const { credentials, setCredentials, login_user } = useContext(AuthContext)
   return (
     <>
