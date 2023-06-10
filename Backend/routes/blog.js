@@ -57,13 +57,16 @@ router.delete('/delete/:id', fetchUser, async (req, res) => {
 })
 
 //Route 3: To find blog of specific genre
-router.get('/find/:genre', async (req, res) => {
+router.get('/find/:genre',fetchUser, async (req, res) => {
     const { genre } = req.params
     try {
         let find_blogs = await Blogs.find({
             genre
         })
-        res.status(200).json({ message_type: "success", blogs: find_blogs })
+        if(req.user){
+            return res.status(200).json({ message_type: "success", blogs: find_blogs,loggedin:true })
+        }
+        res.status(200).json({ message_type: "success", blogs: find_blogs,loggedin:false })
     } catch {
         res.status(500).json({ message_type: "error", message: "Internal Server Error" })
     }
