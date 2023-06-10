@@ -7,7 +7,7 @@ export default function AuthProvider(props) {
 
   const login_user = async () => {
     try {
-      let url = 'http://localhost:5000/api/auth/login'
+      let url = `${process.env.REACT_APP_HOST}/api/auth/login`;
 
       let options = {
         method: "POST",
