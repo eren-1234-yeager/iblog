@@ -16,7 +16,11 @@ function App() {
 
             <Routes>
 
-              <Route path='/' element={<Home />} />
+              <Route path='/' element={<Home category="general"/>} />
+              <Route path='/general' element={<Home category="general"/>} />
+              <Route path='/science' element={<Home category="science"/>} />
+              <Route path='/programming' element={<Home category="programming"/>} />
+              <Route path='/anime' element={<Home category="anime"/>} />
 
             </Routes>
 
