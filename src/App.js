@@ -5,6 +5,7 @@ import BlogProvider from './context/BlogProvider';
 import AuthProvider from './context/AuthProvider';
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import Pagenotfound from './components/Pagenotfound';
+import Admin from './components/Admin';
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
             <Routes>
 
               <Route path='/' element={<Home key="general" category="general"/>} />
+              <Route path='/admin' element={<Admin/>}/>
               <Route path='/general' element={<Home key="general" category="general"/>} />
               <Route path='/science' element={<Home key="science" category="science"/>} />
               <Route path='/programming' element={<Home key="programming" category="programming"/>} />
