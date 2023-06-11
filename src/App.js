@@ -6,6 +6,7 @@ import AuthProvider from './context/AuthProvider';
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import Pagenotfound from './components/Pagenotfound';
 import Admin from './components/Admin';
+import Login from './components/Login';
 
 function App() {
   return (
@@ -15,7 +16,7 @@ function App() {
 
           <BlogProvider>
             <Navbar title="iblog" />
-
+            <Login/>
             <Routes>
 
               <Route path='/' element={<Home key="general" category="general"/>} />

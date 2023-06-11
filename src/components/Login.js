@@ -1,17 +1,16 @@
-import React from 'react'
+import React,{useContext} from 'react'
+import AuthContext from '../context/authContext'
 
-
-export default function Login(props) {
-
+export default function Login() {
+    const { credentials, setCredentials, login_user } = useContext(AuthContext)
 
     const onChange = (e) => {
-        props.setCredentials({ ...props.credentials, [e.target.name]:e.target.value })
+        setCredentials({ ...credentials, [e.target.name]:e.target.value })
     }
-    
 
     const onSubmit=(e)=>{
         e.preventDefault()
-        props.login_user()
+        login_user()
     }
     
     return (
