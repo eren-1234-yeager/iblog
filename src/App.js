@@ -7,6 +7,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import Pagenotfound from './components/Pagenotfound';
 import Admin from './components/Admin';
 import Login from './components/Login';
+import Carousel from './components/Carousel';
 
 function App() {
   return (
@@ -19,7 +20,7 @@ function App() {
             <Login/>
             <Routes>
 
-              <Route path='/' element={<Home key="general" category="general"/>} />
+              <Route path='/' element={[<Carousel key="carousel"/>,<Home key="general" category="general"/>]} />
               <Route path='/admin' element={<Admin/>}/>
               <Route path='/general' element={<Home key="general" category="general"/>} />
               <Route path='/science' element={<Home key="science" category="science"/>} />
