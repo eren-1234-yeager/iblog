@@ -1,4 +1,5 @@
 import React, { useContext } from 'react'
+import { Link } from 'react-router-dom'
 import blogContext from '../context/blogContext'
 
 export default function Blogcard() {
@@ -12,7 +13,7 @@ export default function Blogcard() {
                         <div className="card-body">
                             <h5 className="card-title">{blog.title}</h5>
                             <p className="card-text">{blog.description}</p>
-                            <a href="/" className="btn btn-primary">Read More...</a>
+                            <Link to={`/blogs/${blog.slug}`} className="btn btn-success">Read More...</Link>
                         </div>
                     </div>
                 })}
