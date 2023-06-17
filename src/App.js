@@ -9,6 +9,7 @@ import Admin from './components/Admin';
 import Login from './components/Login';
 import Carousel from './components/Carousel';
 import Blogs from './components/Blogs';
+import Search from './components/Search';
 
 function App() {
   return (
@@ -28,6 +29,7 @@ function App() {
               <Route path='/programming' element={<Home key="programming" category="programming"/>} />
               <Route path='/anime' element={<Home key="anime" category="anime"/>} />
               <Route path='/blogs/:slug' element={<Blogs/>} />
+              <Route path='/search/:query' element={<Search/>} />
               <Route path='*' element={<Pagenotfound/>}/>
             </Routes>
 

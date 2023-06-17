@@ -1,12 +1,22 @@
 import React, { useContext } from 'react'
-import {Link} from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import AuthContext from '../context/authContext'
+import BlogContext from '../context/blogContext'
 
 export default function Navbar(props) {
+    const navigate = useNavigate()
     const { loggedin, setLoggedin } = useContext(AuthContext)
+    const { setSearch, search } = useContext(BlogContext)
     const logOut = () => {
         setLoggedin(false)
         localStorage.removeItem(process.env.REACT_APP_TOKEN)
+    }
+    const searchChange = (e) => {
+        setSearch(e.target.value)
+    }
+    const searchSubmit = (e) => {
+        e.preventDefault()
+        navigate(`/search/${search}`)
     }
     return (
         <>
@@ -35,8 +45,8 @@ export default function Navbar(props) {
                             </li>
 
                         </ul>
-                        <form className="d-flex" role="search">
-                            <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
+                        <form className="d-flex" role="search" onSubmit={searchSubmit}>
+                            <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search" onChange={searchChange} />
                             <button className="btn btn-danger" type="submit">Search</button>
                         </form>
 

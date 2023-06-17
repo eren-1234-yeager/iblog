@@ -6,7 +6,7 @@ export default function BlogProvider(props) {
   const { setLoggedin } = useContext(AuthContext)
   const [genre, setGenre] = useState("general")
   const [blogs, setBlogs] = useState(null)
-
+  const [search, setSearch] = useState('')
   useEffect(() => {
     const fetch_by_genre = async () => {
       let options = {
@@ -29,7 +29,7 @@ export default function BlogProvider(props) {
   }, [genre])
 
   return (
-    <BlogContext.Provider value={{ genre, blogs, setGenre }}>
+    <BlogContext.Provider value={{ genre, blogs, setGenre ,setSearch,search}}>
       {props.children}
     </BlogContext.Provider>
   )
