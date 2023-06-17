@@ -7,8 +7,12 @@ function Blogs() {
         const find_by_slug = async () => {
             let url=`${process.env.REACT_APP_HOST}/api/blog/${slug}`
             let response=await fetch(url)
-            let jsonData=await response.json()
-            setBlog(jsonData.blog)
+            if(response.status!=200){
+                setBlog({title:"No Blog Found!",description:"Check the slug or Spelling!"})
+            }else{
+                let jsonData=await response.json()
+                setBlog(jsonData.blog)
+            }
         }
         find_by_slug()
     }, [])
