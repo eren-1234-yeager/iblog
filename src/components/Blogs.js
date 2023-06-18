@@ -16,7 +16,7 @@ function Blogs() {
         }
         find_by_slug()
     }, [])
-
+    document.title=blog.title
     return (
         <>
         <div className="container">

@@ -3,7 +3,8 @@ import { Link } from 'react-router-dom'
 import blogContext from '../context/blogContext'
 
 export default function Blogcard() {
-    const { blogs } = useContext(blogContext)
+    const { blogs,genre } = useContext(blogContext)
+    document.title=genre
     return (
         <>
             <div className="my-3 row">
