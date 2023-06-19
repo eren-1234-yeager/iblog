@@ -7,7 +7,7 @@ export default function Blogcard() {
     document.title=genre
     return (
         <>
-            <div className="my-3 row">
+            <div className="my-2 row">
                 {blogs && blogs.map((blog) => {
                     return <div className="card mx-1 my-2" key={blog._id} style={{ width: "18rem" }}>
                         {/* <img src="..." className="card-img-top" alt="..."/> */}
