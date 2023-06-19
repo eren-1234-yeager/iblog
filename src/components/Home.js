@@ -6,7 +6,7 @@ import Alert from './Alert'
 
 export default function Home(props) {
   const { setGenre } = useContext(BlogContext)
-  const {alert} = useContext(AuthContext)
+  const { alert } = useContext(AuthContext)
   useEffect(() => {
     setGenre(props.category)
     // eslint-disable-next-line
@@ -15,7 +15,7 @@ export default function Home(props) {
   return (
     <>
       <div className="container">
-        {alert&&
+        {alert &&
           <Alert type={alert.type} message={alert.message} />
         }
         <Blogcard />

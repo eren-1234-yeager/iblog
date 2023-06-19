@@ -19,18 +19,18 @@ function App() {
 
           <BlogProvider>
             <Navbar title="iblog" />
-            <Login/>
+            <Login />
             <Routes>
 
-              <Route path='/' element={[<Carousel key="carousel"/>,<Home key="general" category="general"/>]} />
-              <Route path='/admin' element={<Admin/>}/>
-              <Route path='/general' element={<Home key="general" category="general"/>} />
-              <Route path='/science' element={<Home key="science" category="science"/>} />
-              <Route path='/programming' element={<Home key="programming" category="programming"/>} />
-              <Route path='/anime' element={<Home key="anime" category="anime"/>} />
-              <Route path='/blogs/:slug' element={<Blogs/>} />
-              <Route path='/search/:query' element={<Search/>} />
-              <Route path='*' element={<Pagenotfound/>}/>
+              <Route path='/' element={[<Carousel key="carousel" />, <Home key="general" category="general" />]} />
+              <Route path='/admin' element={<Admin />} />
+              <Route path='/general' element={<Home key="general" category="general" />} />
+              <Route path='/science' element={<Home key="science" category="science" />} />
+              <Route path='/programming' element={<Home key="programming" category="programming" />} />
+              <Route path='/anime' element={<Home key="anime" category="anime" />} />
+              <Route path='/blogs/:slug' element={<Blogs />} />
+              <Route path='/search/:query' element={<Search />} />
+              <Route path='*' element={<Pagenotfound />} />
             </Routes>
 
           </BlogProvider>

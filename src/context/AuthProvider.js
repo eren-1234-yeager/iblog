@@ -6,10 +6,10 @@ export default function AuthProvider(props) {
   const [loggedin, setLoggedin] = useState(false)
   const [alert, setAlert] = useState(null)
 
-  const removeAlert=()=>{
-    setInterval(()=>{
+  const removeAlert = () => {
+    setInterval(() => {
       setAlert(false)
-    },1500)
+    }, 5000)
   }
   const login_user = async () => {
     try {
@@ -28,19 +28,19 @@ export default function AuthProvider(props) {
       if (response.status === 200) {
         localStorage.setItem(process.env.REACT_APP_TOKEN, jsonData.authToken)
         setLoggedin(true)
-        setAlert({type:"success",message:"Loggedin Successfully!"})
+        setAlert({ type: "success", message: "Loggedin Successfully!" })
         removeAlert()
-      }else{
-        setAlert({type:"danger",message:"Loggedin Unsuccessfull!"})
+      } else {
+        setAlert({ type: "danger", message: "Loggedin Unsuccessfull!" })
         removeAlert()
       }
     } catch (err) {
-      setAlert({type:"danger",message:"Internal server error!"})
+      setAlert({ type: "danger", message: "Internal server error!" })
       removeAlert()
     }
   }
   return (
-    <AuthContext.Provider value={{ credentials, setCredentials, login_user, loggedin, setLoggedin,alert,removeAlert,setAlert }}>
+    <AuthContext.Provider value={{ credentials, setCredentials, login_user, loggedin, setLoggedin, alert, removeAlert, setAlert }}>
       {props.children}
     </AuthContext.Provider>
   )

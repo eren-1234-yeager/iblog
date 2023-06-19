@@ -29,7 +29,7 @@ export default function BlogProvider(props) {
   }, [genre])
 
   return (
-    <BlogContext.Provider value={{ genre, blogs, setGenre ,setSearch,search}}>
+    <BlogContext.Provider value={{ genre, blogs, setGenre, setSearch, search }}>
       {props.children}
     </BlogContext.Provider>
   )

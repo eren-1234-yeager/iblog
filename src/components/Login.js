@@ -1,18 +1,18 @@
-import React,{useContext} from 'react'
+import React, { useContext } from 'react'
 import AuthContext from '../context/authContext'
 
 export default function Login() {
     const { credentials, setCredentials, login_user } = useContext(AuthContext)
 
     const onChange = (e) => {
-        setCredentials({ ...credentials, [e.target.name]:e.target.value })
+        setCredentials({ ...credentials, [e.target.name]: e.target.value })
     }
 
-    const onSubmit=(e)=>{
+    const onSubmit = (e) => {
         e.preventDefault()
         login_user()
     }
-    
+
     return (
         <>
             <div className="modal fade" id="loginModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -33,7 +33,7 @@ export default function Login() {
                                     <label htmlFor="password" className="form-label">Password: </label>
                                     <input type="password" name="password" className="form-control" onChange={onChange} id="password" />
                                 </div>
-                                <button type="submit" className="btn btn-primary">Submit</button>
+                                <button type="submit" className="btn btn-primary" data-bs-toggle="modal" data-bs-target="#loginModal">Submit</button>
                             </form>
                         </div>
                     </div>
