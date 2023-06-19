@@ -1,7 +1,11 @@
-import React, { useState } from 'react'
+import React, { useState,useContext } from 'react'
+import AuthContext from '../context/authContext'
+import Alert from './Alert'
 
 export default function Admin() {
     const [content, setContent] = useState({ title: "", description: "", slug: "", genre: "" })
+
+    const {alert,setAlert,removeAlert}=useContext(AuthContext)
 
     const onChange = (e) => {
         setContent({ ...content, [e.target.name]: e.target.value })
@@ -21,7 +25,14 @@ export default function Admin() {
         let response = await fetch(url, options)
         let jsonData=await response.json()
         console.log(jsonData)
-
+        if(response.status!==200){
+            setAlert({type:"danger",message:"There was an error in posting blog!"})
+            removeAlert()
+        }else{
+            setAlert({type:"danger",message:"There was an error in posting blog!"})
+            removeAlert()
+        }
+            
     }
 
     const onSubmit = (e) => {
@@ -30,6 +41,9 @@ export default function Admin() {
     }
     return (
         <>
+        {alert &&
+            <Alert type={alert.type} message={alert.message}/>
+        }
             <h1 className="text-center">Admin Page...</h1>
             <div className="container main">
                 <form onSubmit={onSubmit}>
