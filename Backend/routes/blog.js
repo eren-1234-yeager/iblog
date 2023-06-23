@@ -95,7 +95,11 @@ router.get('/search/:q', async (req, res) => {
     try {
         let query = req.params.q
         let find_blogs = await Blogs.find({
-            title: { $regex: query, $options: "i" }
+            $or:[
+                {title: { $regex: query, $options: "i" }},
+                {description: { $regex: query, $options: "i" }},
+                {genre: { $regex: query, $options: "i" }},
+            ]
         })
         res.status(200).json({ message_type: "success", blogs: find_blogs })
     } catch {

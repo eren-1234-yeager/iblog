@@ -29,7 +29,7 @@ function Search() {
                                 </div>
                             </div>
                         )
-                    }):<h1>No Blogs Found...</h1>
+                    }):<h1 className="text-center">No Blogs Found...</h1>
                     }
                 </div>
             </div>
