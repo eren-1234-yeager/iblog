@@ -26,12 +26,12 @@ export default function Login() {
                             <form onSubmit={onSubmit}>
                                 <div className="mb-3">
                                     <label htmlFor="username" className="form-label">Username: </label>
-                                    <input type="text" className="form-control" id="username" name="username" aria-describedby="emailHelp" onChange={onChange} />
+                                    <input type="text" className="form-control" id="username" name="username" aria-describedby="emailHelp" required={true} minLength={3} onChange={onChange} />
 
                                 </div>
                                 <div className="mb-3">
                                     <label htmlFor="password" className="form-label">Password: </label>
-                                    <input type="password" name="password" className="form-control" onChange={onChange} id="password" />
+                                    <input type="password" name="password" className="form-control" onChange={onChange} id="password" required={true} minLength={3} />
                                 </div>
                                 <button type="submit" className="btn btn-primary" data-bs-toggle="modal" data-bs-target="#loginModal">Submit</button>
                             </form>

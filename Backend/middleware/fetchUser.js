@@ -13,7 +13,6 @@ const fetchUser=(req,res,next)=>{
     }catch(err){
         next()
     }
-
     
 }
 

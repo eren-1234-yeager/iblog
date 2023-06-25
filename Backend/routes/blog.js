@@ -57,16 +57,13 @@ router.delete('/delete/:id', fetchUser, async (req, res) => {
 })
 
 //Route 3: To find blog of specific genre
-router.get('/find/:genre', fetchUser, async (req, res) => {
+router.get('/find/:genre', async (req, res) => {
     const { genre } = req.params
     try {
         let find_blogs = await Blogs.find({
             genre
         })
-        if (req.user) {
-            return res.status(200).json({ message_type: "success", blogs: find_blogs, loggedin: true })
-        }
-        res.status(200).json({ message_type: "success", blogs: find_blogs, loggedin: false })
+        res.status(200).json({ message_type: "success", blogs: find_blogs })
     } catch {
         res.status(500).json({ message_type: "error", message: "Internal Server Error" })
     }
@@ -95,13 +92,24 @@ router.get('/search/:q', async (req, res) => {
     try {
         let query = req.params.q
         let find_blogs = await Blogs.find({
-            $or:[
-                {title: { $regex: query, $options: "i" }},
-                {description: { $regex: query, $options: "i" }},
-                {genre: { $regex: query, $options: "i" }},
+            $or: [
+                { title: { $regex: query, $options: "i" } },
+                { description: { $regex: query, $options: "i" } },
+                { genre: { $regex: query, $options: "i" } },
             ]
         })
         res.status(200).json({ message_type: "success", blogs: find_blogs })
+    } catch {
+        res.status(500).json({ message_type: "error", message: "Internal Server Error" })
+    }
+})
+router.get('/check/user', fetchUser, async (req, res) => {
+
+    try {
+        if (req.user) {
+            return res.status(200).json({ loggedin: true })
+        }
+        return res.status(401).json({ loggedin: false })
     } catch {
         res.status(500).json({ message_type: "error", message: "Internal Server Error" })
     }

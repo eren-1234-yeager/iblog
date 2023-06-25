@@ -15,6 +15,9 @@ const blogSchema = new Schema({
         type: String,
         required: true
     },
+    tags:{
+        type:String
+    },
     slug:{
         type:String,
         required:true,
