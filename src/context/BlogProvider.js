@@ -9,12 +9,12 @@ export default function BlogProvider(props) {
     const fetch_by_genre = async () => {
 
       let url = `${process.env.REACT_APP_HOST}/api/blog/find/${genre}`
-      let response = await fetch(url)
+      let response = await fetch(url)//Fetching url
       let jsonData = await response.json()
-      setBlogs(jsonData.blogs)
+      setBlogs(jsonData.blogs)//Setting Blogs
     }
 
-    fetch_by_genre()
+    fetch_by_genre()//Fetching by genre
     // eslint-disable-next-line
   }, [genre])
 

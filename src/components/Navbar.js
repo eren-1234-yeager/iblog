@@ -5,18 +5,18 @@ import BlogContext from '../context/blogContext'
 
 export default function Navbar(props) {
     const navigate = useNavigate()
-    const { loggedin, setLoggedin } = useContext(AuthContext)
-    const { setSearch, search } = useContext(BlogContext)
+    const { loggedin, setLoggedin } = useContext(AuthContext)//Using Auth Context
+    const { setSearch, search } = useContext(BlogContext)//Using Blog Context
     const logOut = () => {
         setLoggedin(false)
-        localStorage.removeItem(process.env.REACT_APP_TOKEN)
+        localStorage.removeItem(process.env.REACT_APP_TOKEN)//Removing from localStorage
     }
     const searchChange = (e) => {
-        setSearch(e.target.value)
+        setSearch(e.target.value)//Setting Search
     }
     const searchSubmit = (e) => {
-        e.preventDefault()
-        navigate(`/search/${search}`)
+        e.preventDefault()// To prevent reloading
+        navigate(`/search/${search}`)//Navigating
     }
     return (
         <>

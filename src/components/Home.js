@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import BlogContext from '../context/blogContext'
 import AuthContext from '../context/authContext'
 import Blogcard from './Blogcard'
-import Alert from './Alert' 
+import Alert from './Alert'
 
 export default function Home(props) {
   const navigate = useNavigate()
@@ -12,9 +12,11 @@ export default function Home(props) {
 
   useEffect(() => {
     setGenre(props.category)
-    check_User()
+    check_User()//Check whether user loggedin or not.
     // eslint-disable-next-line
   }, [])
+
+  //The code below is to add shortcuts in website.
   document.onkeydown = (e) => {
     if (e.ctrlKey && e.shiftKey && (e.key === "a" || e.key === "A")) {
       navigate('/anime')
@@ -28,10 +30,11 @@ export default function Home(props) {
   return (
     <>
       <div className="container">
-        {alert &&
+        {alert &&//Show Alert Component if alert is not false.
+          //alert is a dictionary that has type and message property.
           <Alert type={alert.type} message={alert.message} />
         }
-        <Blogcard />
+        <Blogcard /> //BlogCard Component
       </div>
     </>
   )

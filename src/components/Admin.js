@@ -5,7 +5,7 @@ import Alert from './Alert'
 export default function Admin() {
     const [content, setContent] = useState({ title: "", description: "", slug: "", genre: "" })
 
-    const { alert, setAlert, removeAlert } = useContext(AuthContext)
+    const { alert, setAlert, removeAlert } = useContext(AuthContext)//Using authContext
 
     const onChange = (e) => {
         setContent({ ...content, [e.target.name]: e.target.value })
@@ -22,22 +22,22 @@ export default function Admin() {
             },
             body: JSON.stringify(content)
         }
-        let response = await fetch(url, options)
+        let response = await fetch(url, options)//Fetching with options
         let jsonData = await response.json()
         console.log(jsonData)
         if (response.status !== 200) {
-            setAlert({ type: "danger", message: "There was an error in posting blog!" })
+            setAlert({ type: "danger", message: "There was an error in posting blog!" })//Alerting the user
             removeAlert()
         } else {
-            setAlert({ type: "danger", message: "There was an error in posting blog!" })
+            setAlert({ type: "danger", message: "There was an error in posting blog!" })//Alerting the user
             removeAlert()
         }
 
     }
 
     const onSubmit = (e) => {
-        e.preventDefault()
-        upload_blog()
+        e.preventDefault()//To prevent reload.
+        upload_blog()//To post a blog.
     }
     return (
         <>

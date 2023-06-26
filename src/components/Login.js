@@ -2,15 +2,16 @@ import React, { useContext } from 'react'
 import AuthContext from '../context/authContext'
 
 export default function Login() {
-    const { credentials, setCredentials, login_user } = useContext(AuthContext)
+    const { credentials, setCredentials, login_user } = useContext(AuthContext)//Using Context
 
     const onChange = (e) => {
+        //Setting Credentials
         setCredentials({ ...credentials, [e.target.name]: e.target.value })
     }
 
     const onSubmit = (e) => {
-        e.preventDefault()
-        login_user()
+        e.preventDefault()//To prevent reload...
+        login_user()//A Function to login a user... See it in context/AuthProvider.js
     }
 
     return (

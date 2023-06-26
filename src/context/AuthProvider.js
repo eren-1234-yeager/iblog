@@ -11,6 +11,10 @@ export default function AuthProvider(props) {
       setAlert(false)
     }, 5000)
   }
+  /*
+    login_user() function is used to login a user.
+    If response is 200 then loggedin to true.
+  */
   const login_user = async () => {
     try {
       let url = `${process.env.REACT_APP_HOST}/api/auth/login`;
@@ -23,19 +27,19 @@ export default function AuthProvider(props) {
         body: JSON.stringify(credentials)
       }
 
-      let response = await fetch(url, options)
+      let response = await fetch(url, options)//Fetching url with options
       let jsonData = await response.json()
       if (response.status === 200) {
-        localStorage.setItem(process.env.REACT_APP_TOKEN, jsonData.authToken)
+        localStorage.setItem(process.env.REACT_APP_TOKEN, jsonData.authToken)//Setting AuthToken to localStorage
         setLoggedin(true)
-        setAlert({ type: "success", message: "Loggedin Successfully!" })
+        setAlert({ type: "success", message: "Loggedin Successfully!" })//Alerting the user 
         removeAlert()
       } else {
-        setAlert({ type: "danger", message: "Loggedin Unsuccessfull!" })
+        setAlert({ type: "danger", message: "Loggedin Unsuccessfull!" })//Alerting the user 
         removeAlert()
       }
     } catch (err) {
-      setAlert({ type: "danger", message: "Internal server error!" })
+      setAlert({ type: "danger", message: "Internal server error!" })//Alerting the user 
       removeAlert()
     }
   }
@@ -47,9 +51,9 @@ export default function AuthProvider(props) {
         "authToken":localStorage.getItem(process.env.REACT_APP_TOKEN)
       }
     }
-    let response = await fetch(url,options)
+    let response = await fetch(url,options)//Fetching url with options
     if(response.status===200){
-      setLoggedin(true)
+      setLoggedin(true)//Setting loggedin
     }
   }
   return (
