@@ -34,7 +34,7 @@ export default function Home(props) {
           //alert is a dictionary that has type and message property.
           <Alert type={alert.type} message={alert.message} />
         }
-        <Blogcard /> //BlogCard Component
+        <Blogcard /> {/*Blogcard Component*/}
       </div>
     </>
   )

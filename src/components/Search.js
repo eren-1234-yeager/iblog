@@ -12,6 +12,7 @@ function Search() {
     }
     useEffect(() => {
         fetch_search()//Searching
+        // eslint-disable-next-line
     }, [blogs])
 
     return (

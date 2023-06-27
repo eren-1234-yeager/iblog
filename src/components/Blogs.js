@@ -15,6 +15,7 @@ function Blogs() {
             }
         }
         find_by_slug()
+        // eslint-disable-next-line
     }, [])
     document.title=blog.title
     return (
